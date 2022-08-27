@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="This is a Counter and Timer project"/>
+    <meta name="keywords" content="Timer, Counter, Olumide Michael Ojo"/>
+    <meta name="author" content="Olumide Michael Ojo"/>
+    <meta name="revision" content="24/08/2022"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <title>JMM Project(Counter & Timer)</title>
+    <link rel="icon" type="icon/png" href="contact.png" sizes="32x32"/>
+
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        * a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            background-color: rgb(249, 243, 248);
+            box-sizing: border-box;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        } 
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            background-color: rgb(17, 14, 74);
+            height: 80px;
+            width: 100%;
+            color: white;
+            text-align: center;
+            padding: 0 3px;
+        }
+
+        header a:hover {
+            color: gold;
+        }
+
+        @media (max-width: 410px) {
+            header {
+                font-size: 1.1em;
+            }
+        }
+
+        .section-1 {
+            width: 100%;
+            /* border: 2px solid white; */
+            padding: 60px 10px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .ct-body {
+            /* border: 2px solid goldenrod; */
+            width: 350px;
+            height: 550px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px 40px 10px;
+            border-radius: 30px 30px 100px 100px;
+            margin: 10px;
+            flex-direction: column;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color: rgb(1, 1, 31);
+
+        }
+
+        .title-cont {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: goldenrod;
+            font-weight: bold;
+            font-size: 2.5em;
+            /* border: 2px solid white; */
+            width: 90%;
+            height: 50px;
+        }
+
+        .screen {
+            width: 90%;
+            height: 35%;
+            border: 2px solid rgb(50, 50, 50);
+            border-radius: 5px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(50, 50, 90);
+            font-size: 3.5em;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1000px) {
+            .section-1 {
+                flex-direction: column;
+            }
+            .ct-body {
+                min-width: 350px;
+                height: 550px;
+            }
+
+            .title-cont {
+                font-size: 2em;
+            }
+
+            .screen  {
+                font-size: 3.5em;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .section-1 {
+                padding: 40px 2px;
+            }
+
+            .ct-body {
+                width: 250px;
+                height: 500px;
+            }
+
+
+            .title-cont {
+                font-size: 1.9em;
+            }
+
+            .screen {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .ct-body {
+                min-width: 250px;
+                height: 400px;
+            }
+
+            .title-cont {
+                font-size: 1.7em;
+            }
+
+            .screen {
+                font-size: 2.2em;
+            }
+
+        }
+        
+
+
+        .button-cont {
+            width: 90%;
+            height: 40%;
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        
+        .btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 100%;
+            font-weight: bolder;
+            font-size: 30px;
+            color: rgb(50, 50, 80);
+            background-color: goldenrod;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            /* border: 1px solid goldenrod; */
+
+        }
+
+        .btn:hover {
+            color: black;
+        }
+
+        .btn:active {
+            background-color: grey;
+        }
+
+        .reset-cont {
+            width: 90%;
+            height: 10%;
+            /* border: 2px solid gray; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rst-btn {
+            width: 100px;
+            height: 40px;
+            outline: none;
+            border: none;
+            color: white;
+            background-color: red;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .rst-btn:active {
+            width: 90px;
+            height: 35px;
+            font-size: 15px;
+        }
+
+
+        /* Timer styling starts here*/
+        .ct-body-2 {
+            background-color: rgb(12, 12, 11);
+            border-radius: 30px;
+        }
+
+        .title-cont-2 {
+            color: white;
+        }
+
+        .screen-2 {
+            flex-direction: column;
+            justify-content: space-between;
+            
+        }
+
+
+        .output-2-cont {
+            width: 100%;
+            height: 100%;
+            /* border: 2px solid teal; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            
+        }
+
+        #output-2 {
+            animation: 1000ms linear 0ms infinite reverse;
+            -webkit-animation: 1000ms linear 0ms infinite reverse;
+            -moz-animation: 1000ms linear 0ms infinite reverse;
+        }
+
+        @keyframes blnk {
+            0% {opacity: 1;}
+            100% {opacity: 0;} 
+        }
+
+        @-webkit-keyframes blnk {
+            0% {opacity: 1;}
+            100% {opacity: 0;} 
+        }
+
+        @-moz-keyframes blnk {
+            0% {opacity: 1;}
+            100% {opacity: 0;} 
+        }
+
+        .sub-output-cont {
+            font-size: 0.3em;
+            font-weight: bold;
+            overflow: hidden;
+            box-sizing: border-box;
+            /* border: 2px solid navy; */
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            color: black;
+        }
+
+        .timer-set {
+            outline: none;
+            border: none;
+            width: 60px;
+        }
+
+        .btn-bg {
+            /* border: 2px solid gold; */
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-2 {
+            color: white;
+            font-size: 18px;
+            width: 90px;
+            height: 50px;
+            font-weight: bolder;
+            text-align: center;
+            background-color: rgb(9, 54, 9);
+            border-radius: 15px;
+        }
+
+        .btn-2:hover {
+            color: white;
+            background-color: rgb(5, 35, 16);
+        }
+
+        .btn-2:active {
+            height: 40px;
+            width: 80px;
+            font-size: 15px;
+        }
+
+        .rst-btn-2 {
+            background-color: rgb(9, 54, 9);
+        }
+
+        .alarm {
+            display: none;
+        }
+
+        @media (max-width: 380px) {
+            .btn-2 {
+                font-size: 14px;
+                height: 40px;
+                width: 80px;
+                border-radius: 10px;
+            }
+
+            .btn-2:active {
+                font-size: 12px;
+                height: 35px;
+                width: 75px;
+            }
+
+            .rst-btn-2 {
+                font-size: 14px;
+                height: 40px;
+                width: 80px;
+                border-radius: 10px;
+            }
+
+            .rst-btn-2:active {
+                font-size: 12px;
+                height: 35px;
+                width: 75px;
+            }
+        }
+    </style>
+</head>
+<body onmouseover="mouseLeave()" onload="alarM()">
+
+    <header  title="visit developer website">
+        <div><a href="https://olumidemichaelojo.netlify.app/index.html">Developed by Just_midemichael &trade;</a></div>
+    </header>
+
+    <section class="section-1">
+        <div class="ct-body">
+            <div class="title-cont">JMM COUNTER</div>
+            <div class="screen"><p id="output-1">This is the screen</p></div>
+            <div class="button-cont btn-1"> 
+                <button class="btn" id="decrease" type="submit" onclick="counTerDecrease()" title="click to reduce count">-</button>
+                <button class="btn" id="increase" type="submit" onclick="counTerIncrease()" title="click to increase count">+</button>
+            </div>
+            <div class="reset-cont">
+                <button class="rst-btn" onclick="reSet()" title="click to reset counter">RESET</button>
+            </div>
+            
+        </div>
+
+        <div class="ct-body ct-body-2">
+            <div class="title-cont title-cont-2">JMM TIMER</div>
+            <div class="screen screen-2">
+                <div class="output-2-cont"><p id="output-2">This is the screen</p></div>
+                <div class="sub-output-cont">
+                    <div><p id="sub-output-1">no action</p></div>
+                    <div>
+                        <input class="timer-set" id="sub-output-2" type="number" name="timer-set" value="" placeholder="00 sec" onfocus="userinput()" />
+                    </div>                    
+                </div>
+                
+            </div>
+            <div class="button-cont"> 
+                <div class="btn-bg">
+                    <button class="btn btn-2" type="submit" title="click to Start Timer" onclick="startTimer()">START</button>
+                </div>
+                <div class="btn-bg">
+                <button class="btn btn-2" type="submit" title="click to Stop Timer" onclick="stopTimer()">STOP</button>
+                </div>
+            </div>
+            <div class="reset-cont">
+                <button class="rst-btn rst-btn-2" title="click to Reset Timer" onclick="resetTimer()">RESET</button>
+            </div>
+        </div>
+
+        <audio class="alarm" id="alarm" src="alarm.mp3" autoplay loop controls></audio>
+    </section>
+
+
+    <script type="text/javascript">
+        outPut = 0;
+        document.getElementById("output-1").innerHTML = outPut;
+        document.getElementById("output-2").innerHTML = outPut;
+
+        function counTerIncrease() {
+             x = document.getElementById("output-1");
+            document.getElementById("output-1").innerHTML = outPut += 1;
+            if (outPut>=0) {
+                x.style.color = "black";
+            }
+        }
+
+        function counTerDecrease() {
+            x = document.getElementById("output-1");
+            document.getElementById("output-1").innerHTML = outPut -= 1;
+            if (outPut<0) {
+                x.style.color = "red";
+            }
+        }
+
+        function reSet() {
+            x = document.getElementById("output-1");
+            outPut = 0;
+            document.getElementById("output-1").innerHTML = outPut;
+                x.style.color = "black";
+        }
+
+        // Timer code
+        timeUp = document.getElementById("output-2");
+        counter = 0;
+        timer_is_on = 0;
+        sec = " sec"
+        setup = document.getElementById("sub-output-2");
+        y = setup;
+
+        function alarM() {
+            document.getElementById("alarm").load();
+            document.getElementById("alarm").pause();
+        }
+
+        function userinput() {
+         setup.value = 10;
+        }
+
+        function mouseLeave() {
+            if (setup.value !="" && setup.value !=null) {
+            setup.value = 10;
+            }
+        }
+
+
+        
+        function timeCount() {
+            document.getElementById("output-2").innerHTML = counter + sec;
+            counter = counter+1;
+            tm = setTimeout("timeCount()", 1000);
+
+            if (setup.value !="" && setup.value !=null) {
+                y = setup.value = 10;
+                userInput = y + 2;
+
+                if (counter == userInput) {
+                    clearTimeout(tm);
+                
+                    document.getElementById("output-2").innerHTML = "Time Up!";
+                    document.getElementById("sub-output-1").innerHTML = "End";  
+                    if (timeUp.innerHTML = "Time Up!") {
+                        timeUp.style.color = "red";
+                        timeUp.style.animationName = "blnk";
+                        alrm = document.getElementById("alarm").play();
+
+                    } 
+                }
+            }
+        }
+
+        function startTimer() {
+            if (!timer_is_on) {
+                timer_is_on = 1; 
+                timeCount();
+
+                document.getElementById("sub-output-1").innerHTML = "counting";
+            }
+
+            if (setup.value !="" && setup.value !=null) {
+                setup.style.display = "flex";
+            }else {
+                setup.style.display = "none";
+            }
+        }
+
+        function stopTimer() {
+            if (counter != 0 && timeUp.innerHTML != "Time Up!" ) {
+                clearTimeout(tm);
+                timer_is_on = 0;
+
+                document.getElementById("sub-output-1").innerHTML = "stopped";
+            }
+
+            
+        }
+
+        function resetTimer() {
+            clearTimeout(tm);
+            timer_is_on = 0;
+            counter = 0;
+            document.getElementById("output-2").innerHTML = 0;
+            document.getElementById("sub-output-1").innerHTML = "no action"
+            document.getElementById("sub-output-2").value = "";
+            setup.style.display = "flex";
+            timeUp.style.color = "black";
+            timeUp.style.animationName = "none";
+            alrm = document.getElementById("alarm").load();
+            alrm = document.getElementById("alarm").pause();
+        }
+
+    </script>
+</body>
+</html>
